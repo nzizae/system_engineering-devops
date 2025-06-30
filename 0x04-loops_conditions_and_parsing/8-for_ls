@@ -4,10 +4,17 @@
 
 for file in *
 do
+    # Skip if no files match (when * doesn't expand)
+    if [[ ! -e "$file" ]]; then
+        continue
+    fi
+    
+    # Skip hidden files
     if [[ "$file" == .* ]]; then
         continue
     fi
     
+    # Extract part after first dash, or show full name if no dash
     if [[ "$file" == *-* ]]; then
         echo "${file#*-}"
     else
